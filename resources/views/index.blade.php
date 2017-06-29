@@ -1,17 +1,23 @@
 @extends('layouts.master')
+
 		@section('title')
 			Trending quotes
 		@endsection	
+		
 		@section('style')
 			<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		@endsection
-						
+		
+		@include('layouts.header')
+		
 		@section('content')
+		
 			@if(!empty(Request::segment(1)))
 				<div class="filter-bar">
 					All quote by the author you select. <a href="/">show all Quotes</a>
 				</div>
 			@endif
+			
 			@if(count($errors))
 			      <div >
 			        <ul>  
@@ -21,11 +27,14 @@
 			        </ul>  
 			      </div>
 			 @endif 
+			 
 			 @if(Session::has('success'))
 			 	<li class="info-box success" style="margin-top: 10px;">{{ Session::get('success') }}</li>
-			 @endif		 	
+			 @endif	
+			 
 			<section class="quotes">
 				<h1>Lastest Quotes</h1>
+				
 				@for($i=0; $i < count($quotes); $i++)
 					<article class="quote">
 						<div class="delete">
@@ -37,19 +46,24 @@
 						</div>
 					</article>
 				@endfor
+				
 				<div class="pagination">
+					
 					@if($quotes->currentpage() !== 1)
 						<a class="a" href="{{ $quotes->previousPageUrl() }}">
 							<span class="fa fa-caret-left"></span>
 						</a>
 					@endif
+					
 					@if($quotes->currentpage() !== $quotes->lastPage() && $quotes->haspages())
 						<a class = "a" href="{{ $quotes->nextPageUrl() }}">
 							<span class="fa fa-caret-right"></span>
 						</a>
 					@endif
+					
 				</div>					
-			</section>			
+			</section>
+			
 			<section class="edit-qoute">
 				<h1>Add a Quote</h1>
 				<form method="post" action="{{ route('save') }}">
@@ -69,4 +83,5 @@
 					<button class="btn" type="submit">Submit Quote</button>
 				</form>
 			</section>
+			
 		@endsection

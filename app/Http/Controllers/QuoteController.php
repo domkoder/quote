@@ -66,4 +66,9 @@ class QuoteController extends Controller
    		return redirect()->route('index')->with(['success'=>'Quote has been deleted successfully']);
    	}	
    }
+   
+   public function admin()
+   {
+      return view('loginadmin'); 
+   }
 }

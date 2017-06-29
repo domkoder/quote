@@ -13,3 +13,4 @@
 Route::get('/{author?}', 'QuoteController@indext')->name('index');
 Route::post('/doquote', 'QuoteController@save')->name('save');
 Route::get('/delete/{id}', 'QuoteController@deleteQuote')->name('delete');
+Route::get('/admin/login', 'QuoteController@admin')->name('admin');
